@@ -13,24 +13,20 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`getIP()`](#getip)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### getIP()
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+getIP() => Promise<{ ip: string | null; }>
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
-
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+**Returns:** <code>Promise&lt;{ ip: string | null; }&gt;</code>
 
 --------------------
 

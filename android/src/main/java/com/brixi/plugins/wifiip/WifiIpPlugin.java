@@ -1,22 +1,54 @@
 package com.brixi.plugins.wifiip;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import java.util.Locale;
 
 @CapacitorPlugin(name = "WifiIp")
 public class WifiIpPlugin extends Plugin {
 
     private WifiIp implementation = new WifiIp();
 
-    @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    WifiManager wifiManager;
+    ConnectivityManager connectivityManager;
+    Context context;
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+    Bridge bridge;
+
+    public void load(Bridge bridge) {
+        this.bridge = bridge;
+        this.wifiManager = (WifiManager) this.bridge.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        this.connectivityManager =
+            (ConnectivityManager) this.bridge.getActivity()
+                .getApplicationContext()
+                .getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        this.context = this.bridge.getContext();
+    }
+
+    public void getIP(PluginCall call) {
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int ip = wifiInfo.getIpAddress();
+        String ipString = formatIP(ip);
+
+        if (ipString != null && !ipString.equals("0.0.0.0")) {
+            JSObject result = new JSObject();
+            result.put("ip", ipString);
+            call.success(result);
+        } else {
+            call.reject("NO_VALID_IP_IDENTIFIED");
+        }
+    }
+
+    private String formatIP(int ip) {
+        return String.format(Locale.ENGLISH, "%d.%d.%d.%d", (ip & 0xff), (ip >> 8 & 0xff), (ip >> 16 & 0xff), (ip >> 24 & 0xff));
     }
 }
