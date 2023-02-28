@@ -1,15 +1,14 @@
 package com.brixi.plugins.wifiip;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.ConnectivityManager;
 
 import com.getcapacitor.Bridge;
+import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginCall;
 
-import android.net.wifi.WifiInfo;
-
-import com.getcapacitor.JSObject;
 
 import java.util.Locale;
 
@@ -25,10 +24,10 @@ public class WifiIp {
         this.bridge = bridge;
         this.wifiManager = (WifiManager) this.bridge.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         this.connectivityManager =
-                (ConnectivityManager) this.bridge.getActivity()
-                        .getApplicationContext()
-                        .getApplicationContext()
-                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+            (ConnectivityManager) this.bridge.getActivity()
+                .getApplicationContext()
+                .getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         this.context = this.bridge.getContext();
     }
 
