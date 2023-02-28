@@ -1,6 +1,6 @@
 {
   "name": "capacitor-plugin-wifi-ip",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Get devices wifi IP address",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
