@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/denikucevic"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" height="20px"></a>
+
 # capacitor-plugin-wifi-ip
 
 Get devices wifi IP address
